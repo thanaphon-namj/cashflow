@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:CashFlow.Helpers"
+             xmlns:converters="clr-namespace:CashFlow.Converters"
+             x:Class="CashFlow.Views.ReportsPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <converters:DateFormatConverter x:Key="dateFormat" />
+        <converters:CurrentcyFormatConverter x:Key="currentcyFormat" />
+        <converters:ColorConverter x:Key="colorKey" />
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Margin="24" Spacing="20">
+        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="5">
+            <Button
+                x:Name="dayButton"
+                Text="Day"
+                TextColor="#242D35"
+                FontAttributes="Bold"
+                BackgroundColor="#FFFFFF"
+                BorderColor="#B0B8BF"
+                HeightRequest="32"
+                Padding="0"
+                Clicked="DayClicked" />
+            <Button
+                Grid.Column="1"
+                x:Name="monthButton"
+                Text="Month"
+                TextColor="#242D35"
+                FontAttributes="Bold"
+                BackgroundColor="#FFFFFF"
+                BorderWidth="1"
+                BorderColor="#B0B8BF"
+                HeightRequest="32"
+                Padding="0"
+                Clicked="MonthClicked" />
+            <Button
+                Grid.Column="2"
+                x:Name="yearButton"
+                Text="Year"
+                TextColor="#242D35"
+                FontAttributes="Bold"
+                BackgroundColor="#FFFFFF"
+                BorderColor="#B0B8BF"
+                HeightRequest="32"
+                Padding="0"
+                Clicked="YearClicked" />
+        </Grid>
+        <Grid ColumnDefinitions="50,*,50" ColumnSpacing="20">
+            <Button
+                BackgroundColor="#FFFFFF"
+                BorderWidth="1"
+                BorderColor="#B0B8BF"
+                WidthRequest="36"
+                HeightRequest="36"
+                Clicked="PrevClicked">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="mdi"
+                        Glyph="{x:Static helpers:IconFonts.Chevron_left}"
+                        Size="20"
+                        Color="#242D35" />
+                </Button.ImageSource>
+            </Button>
+            <Label
+                Grid.Column="1"
+                x:Name="dateText"
+                TextColor="#242D35"
+                FontAttributes="Bold"
+                FontSize="14"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="Center" />
+            <Button
+                Grid.Column="2"
+                BackgroundColor="#FFFFFF"
+                BorderWidth="1"
+                BorderColor="#B0B8BF"
+                WidthRequest="36"
+                HeightRequest="36"
+                Clicked="NextClicked">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="mdi"
+                        Glyph="{x:Static helpers:IconFonts.Chevron_right}"
+                        Size="20"
+                        Color="#242D35" />
+                </Button.ImageSource>
+            </Button>
+        </Grid>
+        <Grid RowDefinitions="290,100,*" RowSpacing="16">
+            <ListView
+                ItemsSource="{Binding Transactions}"
+                SelectionMode="None"
+                SeparatorVisibility="None">
+                <ListView.Header>
+                    <Label
+                        Text="Transaction"
+                        TextColor="#191919"
+                        FontAttributes="Bold"
+                        FontSize="18" />
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid RowDefinitions="22,16" ColumnDefinitions="36,170,*" ColumnSpacing="16">
+                                <Frame
+                                    Grid.RowSpan="2"
+                                    CornerRadius="12"
+                                    BorderColor="Transparent"
+                                    WidthRequest="36"
+                                    HeightRequest="36"
+                                    BackgroundColor="#EBEEF0"
+                                    Padding="0">
+                                    <Image
+                                        Source="{Binding category}"
+                                        Aspect="AspectFill"
+                                        WidthRequest="21"
+                                        HeightRequest="21" />
+                                </Frame>
+                                <Label
+                                    Grid.Column="1"
+                                    Text="{Binding title}"
+                                    TextColor="#191919"
+                                    FontSize="16" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Text="{Binding date, Converter={StaticResource dateFormat}}"
+                                    TextColor="#191919"
+                                    FontSize="12"
+                                    Opacity="0.6" />
+                                <Label
+                                    Grid.RowSpan="2"
+                                    Grid.Column="2"
+                                    Text="{Binding amount, Converter={StaticResource currentcyFormat}}"
+                                    TextColor="{Binding type, Converter={StaticResource colorKey}}"
+                                    FontSize="20"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="End" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView
+                Grid.Row="1"
+                ItemsSource="{Binding Items}"
+                SelectionMode="None"
+                SeparatorVisibility="None">
+                <ListView.Header>
+                    <Label
+                        Text="Most of money goes to"
+                        TextColor="#191919"
+                        FontAttributes="Bold"
+                        FontSize="18" />
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid RowDefinitions="22,16" ColumnDefinitions="36,170,*" ColumnSpacing="16">
+                                <Frame
+                                    Grid.RowSpan="2"
+                                    CornerRadius="12"
+                                    BorderColor="Transparent"
+                                    WidthRequest="36"
+                                    HeightRequest="36"
+                                    BackgroundColor="#EBEEF0"
+                                    Padding="0">
+                                    <Image
+                                        Source="{Binding category}"
+                                        Aspect="AspectFill"
+                                        WidthRequest="21"
+                                        HeightRequest="21" />
+                                </Frame>
+                                <Label
+                                    Grid.Column="1"
+                                    Text="{Binding title}"
+                                    TextColor="#191919"
+                                    FontSize="16" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Text="{Binding date, Converter={StaticResource dateFormat}}"
+                                    TextColor="#191919"
+                                    FontSize="12"
+                                    Opacity="0.6" />
+                                <Label
+                                    Grid.RowSpan="2"
+                                    Grid.Column="2"
+                                    Text="{Binding amount, Converter={StaticResource currentcyFormat}}"
+                                    TextColor="{Binding type, Converter={StaticResource colorKey}}"
+                                    FontSize="20"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="End" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Grid.Row="2" Orientation="Vertical" Spacing="16">
+                <Label
+                    x:Name="incomeText"
+                    Text="0"
+                    TextColor="#18DE4F"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    HorizontalOptions="End" />
+                <Label
+                    x:Name="spendText"
+                    Text="0"
+                    TextColor="#F7487A"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    HorizontalOptions="End" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="20">
+                    <Label
+                        Text="Total Balance"
+                        TextColor="#636363"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="balanceText"
+                        Text="0"
+                        FontAttributes="Bold"
+                        FontSize="24" />
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:CashFlow.Helpers"
+             xmlns:converters="clr-namespace:CashFlow.Converters"
+             x:Class="CashFlow.Views.HomePage">
+
+    <ContentPage.Resources>
+        <converters:DateFormatConverter x:Key="dateFormat" />
+        <converters:CurrentcyFormatConverter x:Key="currentcyFormat" />
+        <converters:ColorConverter x:Key="colorKey" />
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Margin="24" Spacing="16">
+        <StackLayout Orientation="Horizontal">
+            <Label
+                x:Name="nameText"
+                FontSize="20"
+                FontAttributes="Bold"
+                VerticalOptions="Center" />
+            <Button
+                WidthRequest="35"
+                HeightRequest="35"
+                BackgroundColor="#F7F7F7"
+                HorizontalOptions="EndAndExpand"
+                Clicked="Add">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="mdi"
+                        Glyph="{x:Static helpers:IconFonts.Add}"
+                        Size="20"
+                        Color="#242424" />
+                </Button.ImageSource>
+            </Button>
+        </StackLayout>
+        <Frame CornerRadius="8" BorderColor="Transparent" BackgroundColor="#191919" Padding="16,24">
+            <VerticalStackLayout Spacing="16">
+                <Label
+                    Text="Total Balance"
+                    TextColor="#FFFFFF"
+                    Opacity="0.6"
+                    HorizontalOptions="CenterAndExpand" />
+                <Label
+                    x:Name="balanceText"
+                    Text="0"
+                    TextColor="#FFFFFF"
+                    FontSize="32"
+                    HorizontalOptions="CenterAndExpand" />
+                <Grid ColumnDefinitions="*,*">
+                    <StackLayout Orientation="Horizontal" Spacing="16">
+                        <Label
+                            Text="{x:Static helpers:IconFonts.North}"
+                            TextColor="#17DE4F"
+                            FontFamily="mdi"
+                            FontSize="34" />
+                        <StackLayout Orientation="Vertical">
+                            <Label
+                                Text="Income"
+                                TextColor="#17DE4F"
+                                FontSize="12" />
+                            <Label
+                                x:Name="incomeText"
+                                Text="0"
+                                TextColor="#17DE4F"
+                                FontSize="16" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="16">
+                        <Label
+                            Text="{x:Static helpers:IconFonts.South}"
+                            TextColor="#F7487A"
+                            FontFamily="mdi"
+                            FontSize="34" />
+                        <StackLayout Orientation="Vertical">
+                            <Label
+                                Text="Spend"
+                                TextColor="#F7487A"
+                                FontSize="12" />
+                            <Label
+                                x:Name="spendText"
+                                Text="0"
+                                TextColor="#F7487A"
+                                FontSize="16" />
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </Frame>
+        <CollectionView
+            ItemsSource="{Binding Items}"
+            SelectionMode="Single"
+            EmptyView="No items"
+            SelectionChanged="SelectionChanged">
+            <CollectionView.Header>
+                <Label
+                    Text="Recent"
+                    TextColor="#191919"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Margin="0,10,0,10" />
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowDefinitions="22,16" ColumnDefinitions="36,170,*" ColumnSpacing="16" Margin="0,0,0,14">
+                        <Frame
+                            Grid.RowSpan="2"
+                            CornerRadius="12"
+                            BorderColor="Transparent"
+                            WidthRequest="36"
+                            HeightRequest="36"
+                            BackgroundColor="#EBEEF0"
+                            Padding="0">
+                            <Image
+                                Source="{Binding category}"
+                                Aspect="AspectFill"
+                                WidthRequest="21"
+                                HeightRequest="21" />
+                        </Frame>
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding title}"
+                            TextColor="#191919"
+                            FontSize="16" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding date, Converter={StaticResource dateFormat}}"
+                            TextColor="#191919"
+                            FontSize="12"
+                            Opacity="0.6" />
+                        <Label
+                            Grid.RowSpan="2"
+                            Grid.Column="2"
+                            Text="{Binding amount, Converter={StaticResource currentcyFormat}}"
+                            TextColor="{Binding type, Converter={StaticResource colorKey}}"
+                            FontSize="20"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
