@@ -5,6 +5,8 @@
              x:Class="CashFlow.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="IncomeColor">#17DE4F</Color>
+            <Color x:Key="SpendColor">#F7487A</Color>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />

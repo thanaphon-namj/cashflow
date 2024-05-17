@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:CashFlow.Helpers"
+             x:Class="CashFlow.Views.DetailPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <HorizontalStackLayout Padding="5,16,5,5">
+            <Button
+                WidthRequest="35"
+                HeightRequest="35"
+                BackgroundColor="#FFFFFF"
+                Clicked="BackClicked">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="mdi"
+                        Glyph="{x:Static helpers:IconFonts.Chevron_left}"
+                        Size="32"
+                        Color="#242424" />
+                </Button.ImageSource>
+            </Button>
+        </HorizontalStackLayout>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Margin="24,16" Spacing="16">
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="20">
+                    <Button
+                        x:Name="incomeButton"
+                        Text="Income"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="#17DE4F"
+                        BorderColor="#17DE4F"
+                        Clicked="IncomeClicked" />
+                    <Button
+                        Grid.Column="1"
+                        x:Name="spendButton"
+                        Text="Spend"
+                        TextColor="#F7487A"
+                        BackgroundColor="#FFFFFF"
+                        BorderWidth="1"
+                        BorderColor="#F7487A"
+                        Clicked="SpendClicked" />
+                </Grid>
+                <StackLayout Orientation="Vertical" Spacing="16">
+                    <Label
+                        Text="Category"
+                        TextColor="#191919"
+                        FontSize="14"
+                        FontAttributes="Bold" />
+                    <Picker
+                        x:Name="categoryPicker"
+                        Title="Select category"
+                        ItemDisplayBinding="{Binding name}"
+                        SelectedIndexChanged="CategoryPickerChanged" />
+                    <Label
+                        Text="Title"
+                        TextColor="#191919"
+                        FontSize="14"
+                        FontAttributes="Bold" />
+                    <Entry
+                        x:Name="titleText"
+                        Text="{Binding title}"
+                        Placeholder="Enter title"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False" />
+                    <Label
+                        Text="Amount"
+                        TextColor="#191919"
+                        FontSize="14"
+                        FontAttributes="Bold" />
+                    <Entry
+                        Text="{Binding amount}"
+                        Placeholder="Enter amount"
+                        Keyboard="Numeric" />
+                    <Label
+                        Text="Date"
+                        TextColor="#191919"
+                        FontSize="14"
+                        FontAttributes="Bold" />
+                    <DatePicker
+                        x:Name="datePicker"
+                        Date="{Binding date}"
+                        Format="dd MMM yyyy" />
+                    <Label
+                        Text="Image"
+                        TextColor="#191919"
+                        FontSize="14"
+                        FontAttributes="Bold" />
+                    <Frame CornerRadius="10" BorderColor="Transparent" BackgroundColor="#F2F2F7" Padding="30">
+                        <StackLayout Orientation="Vertical" Spacing="16">
+                            <Button
+                                x:Name="galleryButton"
+                                Text="Gallery"
+                                TextColor="#FFFFFF"
+                                BackgroundColor="#FF8C82"
+                                WidthRequest="110"
+                                Clicked="GalleryClicked">
+                                <Button.ImageSource>
+                                    <FontImageSource
+                                        FontFamily="mdi"
+                                        Glyph="{x:Static helpers:IconFonts.Image}"
+                                        Size="20" />
+                                </Button.ImageSource>
+                            </Button>
+                            <Button
+                                x:Name="cameraButton"
+                                Text="Camera"
+                                TextColor="#FFFFFF"
+                                BackgroundColor="#FFAB01"
+                                WidthRequest="110"
+                                Clicked="CameraClicked">
+                                <Button.ImageSource>
+                                    <FontImageSource
+                                        FontFamily="mdi"
+                                        Glyph="{x:Static helpers:IconFonts.Photo_camera}"
+                                        Size="20" />
+                                </Button.ImageSource>
+                            </Button>
+                            <Image
+                                x:Name="imagePreview"
+                                Aspect="AspectFill"
+                                IsVisible="False" />
+                        </StackLayout>
+                    </Frame>
+                    <Button
+                        x:Name="removeButton"
+                        Text="Remove image"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="#FF0000"
+                        WidthRequest="125"
+                        HeightRequest="38"
+                        IsVisible="False"
+                        Clicked="RemoveClicked" />
+                    <Label
+                        Text="Note"
+                        TextColor="#191919"
+                        FontSize="14"
+                        FontAttributes="Bold" />
+                    <Entry
+                        Text="{Binding note}"
+                        Placeholder="Enter note"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False" />
+                    <Button
+                        x:Name="saveButton"
+                        Text="Save"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="#007AFF"
+                        WidthRequest="200"
+                        IsVisible="False"
+                        Clicked="Save">
+                        <Button.ImageSource>
+                            <FontImageSource
+                                FontFamily="mdi"
+                                Glyph="{x:Static helpers:IconFonts.Save}"
+                                Size="20" />
+                        </Button.ImageSource>
+                    </Button>
+                    <StackLayout x:Name="stackButton" Orientation="Horizontal" HorizontalOptions="Center" Spacing="16">
+                        <Button
+                            Text="Save"
+                            TextColor="#FFFFFF"
+                            BackgroundColor="#007AFF"
+                            WidthRequest="150"
+                            Clicked="Save">
+                            <Button.ImageSource>
+                                <FontImageSource
+                                    FontFamily="mdi"
+                                    Glyph="{x:Static helpers:IconFonts.Save}"
+                                    Size="20" />
+                            </Button.ImageSource>
+                        </Button>
+                        <Button
+                            Text="Delete"
+                            TextColor="#FFFFFF"
+                            BackgroundColor="#FF0000"
+                            WidthRequest="150"
+                            Clicked="Delete">
+                            <Button.ImageSource>
+                                <FontImageSource
+                                    FontFamily="mdi"
+                                    Glyph="{x:Static helpers:IconFonts.Close}"
+                                    Size="20" />
+                            </Button.ImageSource>
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

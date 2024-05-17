@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CashFlow.Views.SetupPage">
+
+    <Grid RowDefinitions="150,320,*" RowSpacing="60">
+        <StackLayout Orientation="Horizontal">
+            <Button
+                Text="Skip"
+                TextColor="#000000"
+                FontAttributes="Bold"
+                FontSize="16"
+                BackgroundColor="#FFFFFF"
+                WidthRequest="80"
+                HeightRequest="50"
+                HorizontalOptions="EndAndExpand"
+                Clicked="SkipClicked" />
+        </StackLayout>
+        <StackLayout Grid.Row="1" Margin="24,0" Spacing="16">
+            <Label
+                Text="What’s your name?"
+                FontSize="20"
+                FontAttributes="Bold" />
+            <Entry
+                x:Name="nameEntry"
+                Placeholder="Name"
+                MaxLength="10"
+                IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
+                ReturnType="Next" />
+            <Label
+                Text="How much money you got?"
+                FontSize="20"
+                FontAttributes="Bold" />
+            <Entry
+                x:Name="balanceEntry"
+                Placeholder="Current balance"
+                MaxLength="10"
+                Keyboard="Numeric"
+                IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
+                ReturnType="Done" />
+        </StackLayout>
+        <StackLayout Grid.Row="2" Orientation="Vertical" Margin="24,10">
+            <Button
+                Text="Next"
+                BackgroundColor="#191919"
+                FontAttributes="Bold"
+                FontSize="17"
+                WidthRequest="200"
+                HeightRequest="60"
+                CornerRadius="20"
+                Margin="0,24"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="Start"
+                Clicked="NextClicked" />
+        </StackLayout>
+    </Grid>
+</ContentPage>
